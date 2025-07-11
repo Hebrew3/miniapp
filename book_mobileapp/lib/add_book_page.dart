@@ -63,14 +63,16 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
       return;
     }
 
-    // Additional validation for publish year
     final publishYear = int.tryParse(_publishYearController.text);
     if (publishYear == null || publishYear < 1000 || publishYear > DateTime.now().year + 1) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Please enter a valid publish year'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.red[900],
           behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
       return;
@@ -93,7 +95,7 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Book added successfully!'),
-            backgroundColor: const Color(0xFF667EEA),
+            backgroundColor: const Color(0xFFE50914),
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -106,7 +108,7 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Error: ${response.body}'),
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.red[900],
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -115,7 +117,7 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error adding book: $e'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.red[900],
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -128,12 +130,12 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF667EEA),
-              Color(0xFF764BA2),
-              Color(0xFFF093FB),
+              Color(0xFF121212),
+              Color(0xFF1A1A1A),
+              Color(0xFF000000),
             ],
             stops: [0.0, 0.5, 1.0],
           ),
@@ -141,21 +143,22 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
         child: SafeArea(
           child: Column(
             children: [
-              // Enhanced App Bar with Glassmorphism
+              // Cinematic App Bar
               Container(
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.grey[800]!,
                     width: 1,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 20,
+                      color: Colors.black.withOpacity(0.8),
+                      blurRadius: 30,
+                      spreadRadius: 5,
                       offset: const Offset(0, 10),
                     ),
                   ],
@@ -167,12 +170,15 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.red[900]!.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Colors.red[900]!.withOpacity(0.5),
+                          ),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back,
-                          color: Colors.white,
+                          color: Colors.red[400],
                           size: 24,
                         ),
                       ),
@@ -191,17 +197,17 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                               shadows: [
                                 Shadow(
                                   offset: Offset(0, 2),
-                                  blurRadius: 4,
-                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  color: Colors.black54,
                                 ),
                               ],
                             ),
                           ),
                           Text(
-                            'Share your favorite book with the world',
+                            'Create your next cinematic masterpiece',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.white,
+                              color: Colors.grey,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
@@ -219,17 +225,18 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                   child: SlideTransition(
                     position: _slideAnimation,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[900],
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(35),
                           topRight: Radius.circular(35),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 20,
-                            offset: Offset(0, -5),
+                            color: Colors.black.withOpacity(0.8),
+                            blurRadius: 30,
+                            spreadRadius: 5,
+                            offset: const Offset(0, -10),
                           ),
                         ],
                       ),
@@ -240,24 +247,25 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              // Enhanced Header Icon
+                              // Cinematic Header Icon
                               Container(
                                 padding: const EdgeInsets.all(25),
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(
-                                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                                    colors: [Color(0xFFE50914), Color(0xFFB00710)],
                                   ),
                                   borderRadius: BorderRadius.circular(25),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF667EEA).withOpacity(0.3),
+                                      color: Colors.red[900]!.withOpacity(0.7),
                                       blurRadius: 20,
+                                      spreadRadius: 5,
                                       offset: const Offset(0, 10),
                                     ),
                                   ],
                                 ),
                                 child: const Icon(
-                                  Icons.library_add,
+                                  Icons.movie_creation,
                                   size: 70,
                                   color: Colors.white,
                                 ),
@@ -278,42 +286,42 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                               ),
                               const SizedBox(height: 24),
                               
-                                                         // Author Field
-                           _buildTextField(
-                             controller: _authorController,
-                             label: 'Author',
-                             icon: Icons.person,
-                             validator: (value) {
-                               if (value == null || value.isEmpty) {
-                                 return 'Please enter an author';
-                               }
-                               return null;
-                             },
-                           ),
-                           const SizedBox(height: 24),
-                           
-                           // Publish Year Field
-                           _buildTextField(
-                             controller: _publishYearController,
-                             label: 'Publish Year',
-                             icon: Icons.calendar_today,
-                             validator: (value) {
-                               if (value == null || value.isEmpty) {
-                                 return 'Please enter a publish year';
-                               }
-                               final year = int.tryParse(value);
-                               if (year == null) {
-                                 return 'Please enter a valid year';
-                               }
-                               if (year < 1000 || year > DateTime.now().year + 1) {
-                                 return 'Please enter a valid year between 1000 and ${DateTime.now().year + 1}';
-                               }
-                               return null;
-                             },
-                           ),
-                           const SizedBox(height: 24),
-                           
-                           // Description Field
+                              // Author Field
+                              _buildTextField(
+                                controller: _authorController,
+                                label: 'Author',
+                                icon: Icons.person,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter an author';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 24),
+                              
+                              // Publish Year Field
+                              _buildTextField(
+                                controller: _publishYearController,
+                                label: 'Publish Year',
+                                icon: Icons.calendar_today,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a publish year';
+                                  }
+                                  final year = int.tryParse(value);
+                                  if (year == null) {
+                                    return 'Please enter a valid year';
+                                  }
+                                  if (year < 1000 || year > DateTime.now().year + 1) {
+                                    return 'Please enter a valid year between 1000 and ${DateTime.now().year + 1}';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 24),
+                              
+                              // Description Field
                               _buildTextField(
                                 controller: _descriptionController,
                                 label: 'Description',
@@ -328,14 +336,15 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                               ),
                               const SizedBox(height: 40),
                               
-                              // Enhanced Add Button
+                              // Cinematic Add Button
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF667EEA).withOpacity(0.4),
+                                      color: Colors.red[900]!.withOpacity(0.7),
                                       blurRadius: 25,
+                                      spreadRadius: 5,
                                       offset: const Offset(0, 15),
                                     ),
                                   ],
@@ -343,7 +352,7 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
                                 child: ElevatedButton(
                                   onPressed: _addBook,
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF667EEA),
+                                    backgroundColor: const Color(0xFFE50914),
                                     foregroundColor: Colors.white,
                                     padding: const EdgeInsets.symmetric(vertical: 20),
                                     shape: RoundedRectangleBorder(
@@ -394,8 +403,9 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.5),
             blurRadius: 10,
+            spreadRadius: 2,
             offset: const Offset(0, 5),
           ),
         ],
@@ -403,20 +413,27 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
       child: TextFormField(
         controller: controller,
         maxLines: maxLines,
+        style: TextStyle(
+          color: Colors.grey[300],
+        ),
         decoration: InputDecoration(
           labelText: label,
+          labelStyle: TextStyle(
+            color: Colors.grey[500],
+          ),
           prefixIcon: Container(
             margin: const EdgeInsets.all(8),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                colors: [Color(0xFFE50914), Color(0xFFB00710)],
               ),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF667EEA).withOpacity(0.3),
+                  color: Colors.red[900]!.withOpacity(0.5),
                   blurRadius: 8,
+                  spreadRadius: 2,
                   offset: const Offset(0, 4),
                 ),
               ],
@@ -434,34 +451,25 @@ class _AddBookPageState extends State<AddBookPage> with TickerProviderStateMixin
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey[800]!,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: const BorderSide(
-              color: Color(0xFF667EEA),
+              color: Color(0xFFE50914),
               width: 2,
             ),
           ),
           filled: true,
-          fillColor: Colors.grey.withOpacity(0.05),
+          fillColor: Colors.grey[850],
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 18,
           ),
-          labelStyle: const TextStyle(
-            color: Color(0xFF718096),
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
-        ),
-        style: const TextStyle(
-          fontSize: 16,
-          color: Color(0xFF2D3748),
         ),
         validator: validator,
       ),
     );
   }
-} 
+}
