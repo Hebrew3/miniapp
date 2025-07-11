@@ -164,9 +164,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.red[900],
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 3),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }
@@ -175,9 +178,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : const Color(0xFF667EEA),
+        backgroundColor: isError ? Colors.red[900] : const Color(0xFFE50914),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }
@@ -188,12 +194,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF667EEA),
-              Color(0xFF764BA2),
-              Color(0xFFF093FB),
+              Color(0xFF121212),
+              Color(0xFF1A1A1A),
+              Color(0xFF000000),
             ],
             stops: [0.0, 0.5, 1.0],
           ),
@@ -208,17 +214,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: SlideTransition(
                     position: _slideAnimation,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[900],
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(35),
                           topRight: Radius.circular(35),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 20,
-                            offset: Offset(0, -5),
+                            color: Colors.black.withOpacity(0.8),
+                            blurRadius: 30,
+                            spreadRadius: 5,
+                            offset: const Offset(0, -10),
                           ),
                         ],
                       ),
@@ -240,16 +247,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.15),
+        color: Colors.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(25),
         border: Border.all(
-          color: Colors.white.withOpacity(0.2),
+          color: Colors.grey[800]!,
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
+            color: Colors.black.withOpacity(0.8),
+            blurRadius: 30,
+            spreadRadius: 5,
             offset: const Offset(0, 10),
           ),
         ],
@@ -260,48 +268,49 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Colors.white, Color(0xFFF093FB)],
+                colors: [Color(0xFFE50914), Color(0xFFB00710)],
               ),
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
+                  color: Colors.red[900]!.withOpacity(0.7),
+                  blurRadius: 15,
+                  spreadRadius: 2,
                   offset: const Offset(0, 5),
                 ),
               ],
             ),
             child: const Icon(
-              Icons.auto_stories,
+              Icons.movie_filter_rounded,
               color: Colors.white,
               size: 28,
             ),
           ),
           const SizedBox(width: 20),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'My Book Collection',
+                  'Cinematic Library',
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     shadows: [
                       Shadow(
-                        offset: Offset(0, 2),
-                        blurRadius: 4,
-                        color: Colors.black26,
+                        offset: const Offset(0, 2),
+                        blurRadius: 10,
+                        color: Colors.red[900]!.withOpacity(0.7),
                       ),
                     ],
                   ),
                 ),
                 Text(
-                  'Discover and manage your favorite books',
+                  'Your collection of film-worthy stories',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.white,
+                    color: Colors.grey[400],
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -315,9 +324,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildContent() {
     if (isLoading) {
-      return const Center(
+      return Center(
         child: CircularProgressIndicator(
-          color: Color(0xFF667EEA),
+          color: Colors.red[900],
+          strokeWidth: 3,
         ),
       );
     }
@@ -334,10 +344,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             Icons.error_outline,
             size: 60,
-            color: Colors.red,
+            color: Colors.red[900],
           ),
           const SizedBox(height: 20),
           Text(
@@ -345,7 +355,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Colors.grey[800],
+              color: Colors.grey[300],
             ),
           ),
           const SizedBox(height: 10),
@@ -356,7 +366,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey[600],
+                color: Colors.grey[500],
               ),
             ),
           ),
@@ -364,11 +374,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ElevatedButton(
             onPressed: fetchBooks,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF667EEA),
+              backgroundColor: const Color(0xFFE50914),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              elevation: 8,
+              shadowColor: Colors.red[900],
             ),
             child: const Text(
               'Retry',
@@ -392,39 +404,40 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(30),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                colors: [Color(0xFFE50914), Color(0xFFB00710)],
               ),
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF667EEA).withOpacity(0.3),
-                  blurRadius: 20,
+                  color: Colors.red[900]!.withOpacity(0.7),
+                  blurRadius: 30,
+                  spreadRadius: 5,
                   offset: const Offset(0, 10),
                 ),
               ],
             ),
             child: const Icon(
-              Icons.auto_stories_outlined,
+              Icons.movie_creation_outlined,
               size: 100,
               color: Colors.white,
             ),
           ),
           const SizedBox(height: 30),
-          const Text(
-            'No books yet',
+          Text(
+            'No cinematic books yet',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF2D3748),
+              color: Colors.grey[300],
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Start building your collection\nby adding your first book with title, author, publish year, and description!',
+          Text(
+            'Start building your film-worthy collection\nby adding your first book with title, author, publish year, and description!',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
-              color: Color(0xFF718096),
+              color: Colors.grey[500],
               height: 1.5,
             ),
           ),
@@ -440,12 +453,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           padding: const EdgeInsets.all(25),
           child: Row(
             children: [
-              const Text(
-                'Your Books',
+              Text(
+                'Your Collection',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF2D3748),
+                  color: Colors.grey[300],
                 ),
               ),
               const SizedBox(width: 12),
@@ -453,13 +466,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                    colors: [Color(0xFFE50914), Color(0xFFB00710)],
                   ),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF667EEA).withOpacity(0.3),
+                      color: Colors.red[900]!.withOpacity(0.7),
                       blurRadius: 10,
+                      spreadRadius: 2,
                       offset: const Offset(0, 5),
                     ),
                   ],
@@ -479,7 +493,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         Expanded(
           child: RefreshIndicator(
             onRefresh: fetchBooks,
-            color: const Color(0xFF667EEA),
+            color: const Color(0xFFE50914),
+            backgroundColor: Colors.grey[900],
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               itemCount: books.length,
@@ -500,10 +515,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildBookCard(Book book, int index) {
     return Card(
-      elevation: 4,
+      elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      color: Colors.grey[850],
+      shadowColor: Colors.black.withOpacity(0.8),
       child: Container(
         padding: const EdgeInsets.all(25),
         decoration: BoxDecoration(
@@ -512,10 +529,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.white,
-              const Color(0xFF667EEA).withOpacity(0.05),
+              Colors.grey[850]!,
+              Colors.grey[900]!,
             ],
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              blurRadius: 20,
+              spreadRadius: 2,
+              offset: const Offset(0, 10),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -528,19 +553,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                          colors: [Color(0xFFE50914), Color(0xFFB00710)],
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF667EEA).withOpacity(0.3),
-                            blurRadius: 10,
+                            color: Colors.red[900]!.withOpacity(0.7),
+                            blurRadius: 15,
+                            spreadRadius: 2,
                             offset: const Offset(0, 5),
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.auto_stories,
+                        Icons.movie_rounded,
                         color: Colors.white,
                         size: 28,
                       ),
@@ -551,11 +577,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.grey[900],
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withOpacity(0.5),
                               blurRadius: 4,
                               offset: const Offset(0, 2),
                             ),
@@ -563,10 +589,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         child: Text(
                           '${book.publishYear}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF667EEA),
+                            color: Colors.red[400],
                           ),
                         ),
                       ),
@@ -580,10 +606,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     children: [
                       Text(
                         book.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF2D3748),
+                          color: Colors.grey[300],
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -591,9 +617,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       const SizedBox(height: 6),
                       Text(
                         'by ${book.author}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 15,
-                          color: Color(0xFF667EEA),
+                          color: Colors.red[400],
                           fontWeight: FontWeight.w600,
                         ),
                         maxLines: 1,
@@ -603,17 +629,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF667EEA).withOpacity(0.1),
+                          color: Colors.red[900]!.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: const Color(0xFF667EEA).withOpacity(0.3),
+                            color: Colors.red[900]!.withOpacity(0.5),
                           ),
                         ),
                         child: Text(
                           'Published: ${book.publishYear}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: Color(0xFF667EEA),
+                            color: Colors.red[400],
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -626,15 +652,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: Colors.red[900]!.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: Colors.red.withOpacity(0.2),
+                        color: Colors.red[900]!.withOpacity(0.5),
                       ),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.delete_outline,
-                      color: Colors.red,
+                      color: Colors.red[400],
                       size: 22,
                     ),
                   ),
@@ -645,17 +671,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFF667EEA).withOpacity(0.05),
+                color: Colors.black.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: const Color(0xFF667EEA).withOpacity(0.1),
+                  color: Colors.grey[800]!,
                 ),
               ),
               child: Text(
                 book.description,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
-                  color: Color(0xFF718096),
+                  color: Colors.grey[400],
                   height: 1.6,
                 ),
               ),
@@ -672,8 +698,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF667EEA).withOpacity(0.4),
+            color: Colors.red[900]!.withOpacity(0.7),
             blurRadius: 25,
+            spreadRadius: 5,
             offset: const Offset(0, 15),
           ),
         ],
@@ -699,7 +726,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             await addBook(result);
           }
         },
-        backgroundColor: const Color(0xFF667EEA),
+        backgroundColor: const Color(0xFFE50914),
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add, size: 28),
         label: const Text(
@@ -721,15 +748,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           child: Container(
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              gradient: const LinearGradient(
+              gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Colors.white, Color(0xFFF7FAFC)],
+                colors: [
+                  Colors.grey[900]!,
+                  Colors.grey[850]!,
+                ],
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.8),
+                  blurRadius: 30,
+                  spreadRadius: 5,
+                  offset: const Offset(0, 10),
+                ),
+              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -737,30 +777,33 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.1),
+                    color: Colors.red[900]!.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Colors.red[900]!.withOpacity(0.5),
+                    ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.delete_forever,
-                    color: Colors.red,
+                    color: Colors.red[400],
                     size: 50,
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   'Delete Book',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2D3748),
+                    color: Colors.grey[300],
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'Are you sure you want to delete "${book.title}"? This action cannot be undone.',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Color(0xFF718096),
+                  style: TextStyle(
+                    color: Colors.grey[500],
                     height: 1.5,
                     fontSize: 16,
                   ),
@@ -776,12 +819,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          side: const BorderSide(color: Color(0xFF718096)),
+                          side: BorderSide(color: Colors.grey[700]!),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Cancel',
                           style: TextStyle(
-                            color: Color(0xFF718096),
+                            color: Colors.grey[300],
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -795,12 +838,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           deleteBook(book.id);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: const Color(0xFFE50914),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
+                          elevation: 8,
+                          shadowColor: Colors.red[900],
                         ),
                         child: const Text(
                           'Delete',
